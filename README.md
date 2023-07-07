@@ -15,14 +15,14 @@ az aks get-credentials -n AKS-CRO-B20 -g PERSO_CLEMENT
 
 Appli générant des logs exemple : 
 https://hub.docker.com/r/chentex/random-logger/
-Le déploiement des containers pour cette appli a été fais directement sur le cluster AKS sur le portail Azure : 
+Le déploiement des containers pour cette appli a été fais directement sur le cluster AKS sur le portail Azure
 
 Créer un namespace monitoring
 Prometheus = collecte les metrics uniquement (fonctionne pour container et VM mais ici on ne l’utilise que pour les container)
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 helm install prometheus prometheus-community/prometheus
-Graphana = Affiche les infos en prenant des data sources (ajouter des datasources pour Prometheus et Elasticsearch sur graphana plus tard) 
+Graphana = Affiche les infos en prenant des data sources (ajouter des datasources pour Prometheus et Loki sur graphana plus tard) 
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 helm install grafana grafana/grafana
@@ -50,7 +50,7 @@ Ensuite, il faut exposer les “services” Prometheus et Graphana (et Loki j’
 
 Des External IP apparaissent ensuite.
 Pour être sûr vérifier le nsg lié au Vnet : 
-Ajouter des règles au NSG lié au Subnet afin d’autoriser l’accès depuis Internet aux IP  Externe de Prometheus et Graphana (et Loki ?)
+Ajouter des règles au NSG lié au Subnet afin d’autoriser l’accès depuis Internet a l'IP publique de Grafana
 
 
 kubens permet de savoir dans quel namespace on se trouve
